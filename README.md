@@ -25,6 +25,23 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+### Brief → dev tasks API
+
+`POST /briefs/transform` accepts `{ "text": string }` (max 100,000 characters) and returns structured JSON (`workItems`, `gaps`, etc.) using OpenAI. There is no authentication; run behind a trusted network for production.
+
+**Environment variables** (set in `backend/.env`):
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `OPENAI_API_KEY` | Yes (for transform) | OpenAI API key |
+| `OPENAI_MODEL` | Yes (for transform) | Model id (e.g. `gpt-4o-mini`) |
+| `PORT` | No | Server port (default `3000`) |
+| `FRONTEND_ORIGIN` | No | CORS origin for the Vite app (default `http://localhost:5173`) |
+
+**CSV export (frontend):** exported rows use columns `issue_key_placeholder`, `summary`, `description`, `acceptance_criteria`, `labels`, `depends_on` so PMs can map them to their Jira CSV importer (column names differ by Jira version).
+
+See `frontend` README for running the UI with the dev proxy (`/api` → this server).
+
 ## Project setup
 
 ```bash
